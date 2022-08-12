@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<meta name="robots" content='noindex, nofollow'>
+
+		<!-- Fonts -->
+		<link href="https://fonts.googleapis.com/css?family=Roboto:200,400,600" rel="stylesheet">
+		<!-- Bootstrap -->
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+
+		<title></title>
+	</head>
+	<body>
+		<!-- Section Video File Size -->
+
+		<!-- HAP File Size -->
+		<div class='col-lg-4 anchor' id="calchapFileSize">
+			<!-- <h2>HAP File Size</h2> -->
+			<form name="hapFlieSize" id="hapFlieSize" autocomplete="off">
+				<div class="form-group">
+					<div class="row">
+						<div class="col">
+							<label for="hapVersion">HAP Version :</label>
+							<select class="form-control" id="hapVersion">
+								<option value="hap">HAP</option>
+								<option value="hapa">HAP Alpha</option>
+								<option value="hapq">HAP Q</option>
+								<option value="hapqa">HAP Q Alpha</option>
+							</select>
+						</div>
+					</div>
+					<div class="row">
+						<div class='col'>
+							<label for="hapWidth">Video Width :</label>
+							<input class="form-control" type="number" min="0" step="any" id="hapWidth" name="hapWidth">
+						</div>
+						<div class='col'>
+							<label for="hapHeight">Video Height :</label>
+							<input class="form-control" type="number" min="0" step="any" id="hapHeight" name="hapHeight">
+						</div>
+					</div>
+					<div class="row">
+
+						<div class='col'>
+							<label for="hapLength">Video length :</label>
+							<input class="form-control" type="number" min="0" step="any" id="hapLength" name="hapLength">
+						</div>
+						<div class="col-3">
+							<label for="hapLengthUnits">Unit :</label>
+							<select class="form-control" id="hapLengthUnits">
+								<option value="sec">Sec.</option>
+								<option value="min">Min.</option>
+								<option value="hour">Hr.</option>
+							</select>
+						</div>
+						<div class='col'>
+							<label for="hapFPS">FPS :</label>
+							<input class="form-control" type="number" min="0" step="any" id="hapFPS" name="hapFPS">
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="row">
+						<div class='col'>
+							<button class="btn btn-block btn-outline-dark" onclick="hapFileSizeCalc('hapVersion', 'hapWidth', 'hapHeight', 'hapLength', 'hapLengthUnits','hapFPS', 'hapResultMBs', 'hapResultMB', 'hapResultGB')" type="button">Calculate </button>
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class='row'>
+						<div class="col-7">
+							<div>
+								<label for="hapResultMBs">Result (MB/s):</label>
+								<input class="form-control"  type="text" min="0" step="any" id ="hapResultMBs" name="hapResultMBs" readonly>
+							</div>
+						</div>
+					</div>
+					<div class='row'>
+						<div class="col-7">
+							<div>
+								<label for="hapResultMB">Result (MB):</label>
+								<input class="form-control"  type="text" min="0" step="any" id ="hapResultMB" name="hapResultMB" readonly>
+							</div>
+						</div>
+					</div>
+					<label for="hapResultGB">Result (GB):</label>
+					<div class='row'>
+						<div class='col-7'>
+							<div>
+								<input class="form-control"  type="text" min="0" step="any" id ="hapResultGB" name="hapResultGB" readonly>
+							</div>
+						</div>
+						<div class='col'>
+							<button class="btn btn-block btn-outline-danger" onclick="setfocus('hapWidth')" type="reset">Reset </button>
+						</div>
+					</div>
+				</div>
+			</form>
+			<p>*Worst case scenario values based on constant texture compression ratios for each format.</p>
+			<!-- <hr> -->
+		</div>
+
+		<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+		<script src="../../convert.js"></script>
+
+	</body>
+</html>

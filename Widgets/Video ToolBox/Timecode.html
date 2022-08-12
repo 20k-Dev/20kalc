@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<meta name="robots" content='noindex, nofollow'>
+
+		<!-- Fonts -->
+		<link href="https://fonts.googleapis.com/css?family=Roboto:200,400,600" rel="stylesheet">
+		<!-- Bootstrap -->
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+
+		<title></title>
+	</head>
+	<body>
+		<!-- Section Video ToolBox -->
+
+		<!-- TIMECODE CALCULATOR -->
+		<div class='col-lg-4 anchor' id="calctimecodecalc">
+			<!-- <h2>Calculateur TIMECODE</h2> -->
+			<form name="timecodecalc" id="timecodecalc" autocomplete="off">
+				<div class="form-group">
+					<label for="tcFPS">Framerate :</label>
+					<div class="row">
+						<div class='col'>
+							<input class="form-control" type="number" min="0" step="any" id="tcFPS" name="tcFPS" onchange="tcCalc('tcFPS', 'tcStart')" placeholder="Enter FPS">
+						</div>
+					</div>
+					<label for="tcStart">Timeline Start :</label>
+					<div class="row">
+						<div class='col'>
+							<input class="form-control" type="text" min="0" step="any" id="tcStart" name="tcStart" onchange="tcCalc('tcFPS', 'tcStart')" value="00:00:00:00">
+						</div>
+					</div>
+				</div>
+				<div class="form-group" id="tcTable">
+					<div class="row">
+						<div class="col">
+							<label for="tcIn0">Clip Duration :</label>
+						</div>
+						<div class="col">
+							<label for="tcOut0">Last Frame Timecode :</label>
+						</div>
+					</div>
+					<div class='row'>
+						<div class='col'>
+							<input class="form-control" type="text" min="0" step="any" id="tcIn0" name="tcIn0" onchange="tcCalc('tcFPS', 'tcStart')" value="00:00:00:00">
+						</div>
+						<div class='col'>
+							<input class="form-control"  type="text" min="0" step="any" id ="tcOut0" name="tcOut0" readonly>
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="row">
+						<div class='col'>
+							<button class="btn btn-block btn-outline-dark" onclick="tcAddRow()" type="button">Add rows </button>
+						</div>
+					</div>
+				</div>
+				<div class='row'>
+					<div class='col'>
+						<button class="btn btn-block btn-outline-danger" onclick="setfocus('tcIn0')" type="reset">Reset </button>
+					</div>
+				</div>
+			</form>
+			<!-- <hr> -->
+		</div>
+
+		<!-- Template new row -->
+		<div class='row' id="newlinetpl" style="display:none">
+			<div class='col'>
+				<input class="form-control" type="text" min="0" step="any" id="timecodein" name="timecodein" onchange="tcCalc('tcFPS', 'tcStart')" value="00:00:00:00">
+			</div>
+			<div class='col'>
+				<input class="form-control"  type="text" min="0" step="any" id ="timecodeout" name="timecodeout" readonly>
+			</div>
+		</div>
+
+		<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+		<script src="../../convert.js"></script>
+
+	</body>
+</html>

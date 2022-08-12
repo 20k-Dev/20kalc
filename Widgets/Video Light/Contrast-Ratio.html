@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<meta name="robots" content='noindex, nofollow'>
+
+		<!-- Fonts -->
+		<link href="https://fonts.googleapis.com/css?family=Roboto:200,400,600" rel="stylesheet">
+		<!-- Bootstrap -->
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+
+		<title></title>
+	</head>
+	<body>
+		<!-- Section Video Light -->
+
+		<!-- Contrast Ratio -->
+		<div class='col-lg-4 anchor' id="calccontrastratio">
+			<!-- <h2>Contrast Ratio</h2> -->
+			<form name="contrastratio" id="contrastratio" autocomplete="off">
+				<div class="form-group">
+					<label for="contrastcr">Contrast ratio :</label>
+					<div class='row'>
+						<div class='col-3'>
+							<input class="form-control"  type="text" min="0" step="any" id ="contrastcr" name="contrastcr">
+						</div>
+						<p>:1</p>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="contrastill">Ambiant illuminance :</label>
+					<div class='row'>
+						<div class='col'>
+							<input class="form-control" type="number" min="0" step="any" id="contrastill" name="contrastill" placeholder="Lux or FC">
+						</div>
+						<div class="col-3">
+							<select class="form-control" id="contrastiunits">
+								<option value="fc">FC</option>
+								<option value="lux">Lux</option>
+							</select>
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="contrastgain">Screen gain :</label>
+					<div class='row'>
+						<div class='col'>
+							<input class="form-control"  type="text" min="0" step="any" id ="contrastgain" name="contrastgain">
+						</div>
+					</div>
+				</div>
+				<div class='form-group'>
+					<label for="contrastill">Select result :</label>
+					<div class="row">
+
+						<div class="col">
+							<select class="form-control" id="result" onchange="contrastresult('result')">
+								<option value="ill">Screen Illuminance</option>
+								<option value="ansi">Projector ANSI Lumens</option>
+							</select>
+						</div>
+					</div>
+				</div>
+				<div id="dims" class="form-group" style="display:none">
+					<div class='row'>
+						<div class='col'>
+							<label for="contrastscreenwidth">Screen Width (M) :</label>
+						</div>
+						<div class='col-4'></div>
+						<div class='col'>
+							<label for="contrastscreenheight">Screen Height (M) :</label>
+						</div>
+					</div>
+					<div class='row'>
+						<div class='col'>
+							<input class="form-control" type="number" min="0" step="any" id="contrastscreenwidth" name="contrastscreenwidth" onchange="ratioLockSelect('contrastratio', 'contrastscreenwidth', 'contrastscreenheight')">
+						</div>
+						<div class='col-4'>
+							<select class="form-control" id="contrastratio" onchange="ratioLockSelect('contrastratio', 'contrastscreenwidth', 'contrastscreenheight')">
+								<option value="custom">Custom</option>
+								<option value="sxga">5:4</option>
+								<option value="vga">4:3</option>
+								<option value="hvga">3:2</option>
+								<option value="wuxga">16:10</option>
+								<option value="wxga">5:3</option>
+								<option value="hd">16:9</option>
+								<option value="2k">17:9</option>
+								<option value="uwhd">21:9</option>
+							</select>
+						</div>
+						<div class='col'>
+							<input class="form-control" type="number" min="0" step="any" id="contrastscreenheight" name="contrastscreenheight" onchange="ratioLockCalcW('contrastratio', 'contrastscreenwidth', 'contrastscreenheight')">
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class='row'>
+						<div class='col'>
+							<button class="btn btn-block btn-outline-dark" onclick="contrastcalc('contrastcr','contrastill', 'contrastiunits', 'contrastgain', 'contrastprjunits', 'contrastprjill', 'contrastscreenwidth', 'contrastscreenheight', 'contrastansi', 'result')" type="button">Convert </button>
+						</div>
+					</div>
+
+				</div>
+				<div id="result1">
+					<div class="form-group">
+						<label for="contrastprjill">Required screen illuminance :</label>
+						<div class='row'>
+							<div class='col'>
+								<input class="form-control"  type="text" min="0" step="any" id ="contrastprjill" name="contrastprjill" readonly>
+							</div>
+							<div class="col-3">
+								<select class="form-control" id="contrastprjunits" onchange="contrastcalc('contrastcr','contrastill', 'contrastiunits', 'contrastgain', 'contrastprjunits', 'contrastprjill', 'contrastscreenwidth', 'contrastscreenheight', 'contrastansi', 'result')">
+									<option value="fc">FC</option>
+									<option value="lux">Lux</option>
+								</select>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="result2" style="display:none">
+					<div class="form-group">
+						<label for="contrastansi">Required projector ANSI lumens :</label>
+						<div class='row'>
+							<div class='col'>
+								<input class="form-control"  type="text" min="0" step="any" id ="contrastansi" name="contrastansi" readonly>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="row">
+						<div class='col'>
+							<button class="btn btn-block btn-outline-danger" onclick="contrastresult('result');setfocus('contrastcr')" type="reset">Reset </button>
+						</div>
+					</div>
+				</div>
+			</form>
+			<table class="table table-sm table-hover">
+				<thead>
+					<tr>
+						<th scope="col">Ratio</th>
+						<th scope="col">Informations</th>
+						<th scope="col">Notes</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<th scope="row">10:1</th>
+						<td class="small">GRAPHIC ONLY</td>
+						<td class="small">- 3/31 NUANCE DE GRIS (9%)</td>
+					</tr>
+					<tr>
+						<th scope="row">16:1</th>
+						<td class="small">MINIMUM FOR CINEMATIC</td>
+						<td colspan="2"></td>
+					</tr>
+					<tr>
+						<th scope="row">18:1</th>
+						<td class="small">GOOD CONTRAST RATIO</td>
+						<td class="small">- 2/31 NUANCE DE GRIS (6%)</td>
+					</tr>
+					<tr>
+						<th scope="row">20:1</th>
+						<td class="small">TARGET FOR CINEMATIC</td>
+						<td colspan="2"></td>
+					</tr>
+				</tbody>
+			</table>
+			<!-- <hr> -->
+		</div>
+
+		<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+		<script src="../../convert.js"></script>
+
+	</body>
+</html>
